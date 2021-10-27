@@ -5,26 +5,31 @@ import './index.css';
 
 export default({movielist, searchValue, searchResults, setSearchResults, onUpdate}) => {
     
+    //Declaração de variável state para setar os filmes que vão aparecer na tela de resultados.
     const [movies, setMovies] = useState([]);
 
+    //Hook para atualizar a fetch da API de acordo com o que está sendo digitado na barra de pesquisa.
     useEffect(async() => {
 
+        //Verificação de segurança para ver se tem algum filme com o valor da pesquisa
         if(await Tmdb.getByName(searchValue)){
+            //Setando os resultados da pesquisa de acordo com o que foi pesquisado.
             setSearchResults(await Tmdb.getByName(searchValue));
         }
 
-        console.log(searchResults);
-
+        //Verificação de segurança caso não tenhamos nenhum resultado de pesquisa
         if(searchResults.length === 0){
             return
         }
 
+        //Verificação de segurança para caso dê algum erro no fetch da API
         if(searchResults[0].items.errors === undefined){
             setMovies(searchResults);
         }
         
     }, [searchValue])
 
+    //Hook para setar os filmes que aparecem nas rows do SearchResult
     useEffect(() => {
         setMovies(movielist);
     }, [movielist])

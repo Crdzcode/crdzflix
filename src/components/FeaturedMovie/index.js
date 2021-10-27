@@ -10,11 +10,13 @@ export default ({item}) => {
     let personDate = new Date(item.birthday);
     let today = new Date();
 
+    //Separar gêneros dentro de um array, para conseguir emitir na tela de forma organizada.
     let genres = [];
     for(let i in item.genres){
         genres.push(item.genres[i].name);
     }
 
+    //Função para checar o tipo de media. Se é um filme, série ou artista. Trocando o caminho da imagem de fundo de acordo com o tipo.
     function checkMediaType(){
         if(item.budget!==undefined){
             if(item.backdrop_path!==backgroundPath){

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './index.css';
 import Tmdb from '../../Tmdb';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -6,10 +6,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 export default ({title, items, slug, onClick}) => {
 
-    function convertRemToPixels(rem) {    
-        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-    }
-
+    //Checar se o artista tem foto de perfil ou não.
     function checkPerson(){
         let result = items.results[0];
         if(items.results[0] !== undefined){
@@ -22,6 +19,8 @@ export default ({title, items, slug, onClick}) => {
         
     }
 
+    //Função que realiza o fetch dos detalhes do que o usuário clicou.
+    //Possuí verificações para pegar detalhes de acordo com o tipo de midia.
     async function setFeatured(id, release, profile){
         
         let details;
@@ -54,7 +53,7 @@ export default ({title, items, slug, onClick}) => {
     const handleRightArrow = () => {
         let x = scrollX + Math.round(window.innerWidth / 2);
         setScrollX(x);
-        movielistref.current.scroll(x,0)
+        movielistref.current.scroll(x,0);
     }
 
     return (
